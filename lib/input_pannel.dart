@@ -6,11 +6,11 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:wordle/validation_provider.dart';
+import 'package:Kankerdle/validation_provider.dart';
 import './event_bus.dart';
 
 class InputPannelWidget extends StatefulWidget {
-  const InputPannelWidget({Key? key}) : super(key: key);
+  const InputPannelWidget({super.key});
 
   @override
   State<InputPannelWidget> createState() => _InputPannelWidgetState();
@@ -32,9 +32,9 @@ class _InputPannelWidgetState extends State<InputPannelWidget> {
   void _onAnimationStops(dynamic args) {
     setState(() {
       _cache.forEach((key, value) {
-          if(_keyState[key] != 1){
-            _keyState[key] = value;
-          }
+        if (_keyState[key] != 1) {
+          _keyState[key] = value;
+        }
       });
     });
   }
@@ -47,7 +47,7 @@ class _InputPannelWidgetState extends State<InputPannelWidget> {
         zCode - aCode + 1,
         (index) => String.fromCharCode(aCode + index),
       );
-      for(String c in alphabet) {
+      for (String c in alphabet) {
         _keyState[c] ??= 0;
         _keyState[c] = 0;
       }
@@ -63,7 +63,7 @@ class _InputPannelWidgetState extends State<InputPannelWidget> {
       zCode - aCode + 1,
       (index) => String.fromCharCode(aCode + index),
     );
-    for(String c in alphabet) {
+    for (String c in alphabet) {
       _keyState[c] ??= 0;
       _keyState[c] = 0;
     }
@@ -92,82 +92,96 @@ class _InputPannelWidgetState extends State<InputPannelWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                const Spacer(flex: 1,),
-                for(int i = 0; i < 10; i++)
+                const Spacer(
+                  flex: 1,
+                ),
+                for (int i = 0; i < 10; i++)
                   Expanded(
                     flex: 2,
-                    child:Padding(
+                    child: Padding(
                       padding: const EdgeInsets.fromLTRB(3.0, 5.0, 3.0, 5.0),
                       child: ConstrainedBox(
-                        constraints: const BoxConstraints.expand(height: 50.0),
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-                            backgroundColor: MaterialStateProperty.all<Color?>(
-                              _keyState[_keyPos[0][i]]! == 0 ? Colors.grey[400] :
-                              _keyState[_keyPos[0][i]]! == 1 ? Colors.green[600] :
-                              _keyState[_keyPos[0][i]]! == 2 ? Colors.yellow[800] :
-                              Colors.grey[700]
+                          constraints: const BoxConstraints.expand(height: 50.0),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
+                              backgroundColor: MaterialStateProperty.all<Color?>(_keyState[_keyPos[0][i]]! == 0
+                                  ? Colors.grey[400]
+                                  : _keyState[_keyPos[0][i]]! == 1
+                                      ? Colors.green[600]
+                                      : _keyState[_keyPos[0][i]]! == 2
+                                          ? Colors.yellow[800]
+                                          : Colors.grey[700]),
+                              padding: MaterialStateProperty.all<EdgeInsets?>(const EdgeInsets.all(0)),
                             ),
-                            padding: MaterialStateProperty.all<EdgeInsets?>(const EdgeInsets.all(0)),
-                          ),
-                          child: Center(
-                            child: Text(
-                              _keyPos[0][i],
-                              style: TextStyle (
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: _keyState[_keyPos[0][i]]! == 0 ? Colors.grey[850] : Colors.white,
+                            onPressed: "KANKER".contains(_keyPos[0][i])
+                                ? () {
+                                    InputNotification(type: InputType.singleCharacter, msg: _keyPos[0][i]).dispatch(context);
+                                  }
+                                : null,
+                            child: Center(
+                              child: Visibility(
+                                visible: "KANKER".contains(_keyPos[0][i]),
+                                child: Text(
+                                  _keyPos[0][i],
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: _keyState[_keyPos[0][i]]! == 0 ? Colors.grey[850] : Colors.white,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                          onPressed: () {
-                            InputNotification(type: InputType.singleCharacter, msg: _keyPos[0][i]).dispatch(context);
-                          },
-                        )
-                      ),
+                          )),
                     ),
                   ),
-                const Spacer(flex: 1,),
+                const Spacer(
+                  flex: 1,
+                ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                for(int i = 0; i < 9; i++)
+                for (int i = 0; i < 9; i++)
                   Expanded(
                     flex: 1,
-                    child:Padding(
+                    child: Padding(
                       padding: const EdgeInsets.fromLTRB(3.0, 5.0, 3.0, 5.0),
                       child: ConstrainedBox(
-                        constraints: const BoxConstraints.expand(height: 50.0),
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-                            backgroundColor: MaterialStateProperty.all<Color?>(
-                              _keyState[_keyPos[1][i]]! == 0 ? Colors.grey[400] :
-                              _keyState[_keyPos[1][i]]! == 1 ? Colors.green[600] :
-                              _keyState[_keyPos[1][i]]! == 2 ? Colors.yellow[800] :
-                              Colors.grey[700]
+                          constraints: const BoxConstraints.expand(height: 50.0),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
+                              backgroundColor: MaterialStateProperty.all<Color?>(_keyState[_keyPos[1][i]]! == 0
+                                  ? Colors.grey[400]
+                                  : _keyState[_keyPos[1][i]]! == 1
+                                      ? Colors.green[600]
+                                      : _keyState[_keyPos[1][i]]! == 2
+                                          ? Colors.yellow[800]
+                                          : Colors.grey[700]),
+                              padding: MaterialStateProperty.all<EdgeInsets?>(const EdgeInsets.all(0)),
                             ),
-                            padding: MaterialStateProperty.all<EdgeInsets?>(const EdgeInsets.all(0)),
-                          ),
-                          child: Center(
-                            child: Text(
-                              _keyPos[1][i],
-                              style: TextStyle (
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: _keyState[_keyPos[1][i]]! == 0 ? Colors.grey[850] : Colors.white,
+                            onPressed: "KANKER".contains(_keyPos[1][i])
+                                ? () {
+                                    InputNotification(type: InputType.singleCharacter, msg: _keyPos[1][i]).dispatch(context);
+                                  }
+                                : null,
+                            child: Center(
+                              child: Visibility(
+                                visible: "KANKER".contains(_keyPos[1][i]),
+                                child: Text(
+                                  _keyPos[1][i],
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: _keyState[_keyPos[1][i]]! == 0 ? Colors.grey[850] : Colors.white,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                          onPressed: () {
-                            InputNotification(type: InputType.singleCharacter, msg: _keyPos[1][i]).dispatch(context);
-                          },
-                        )
-                      ),
+                          )),
                     ),
                   ),
                 Expanded(
@@ -199,40 +213,47 @@ class _InputPannelWidgetState extends State<InputPannelWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                const Spacer(flex: 1,),
-                for(int i = 0; i < 7; i++)
+                const Spacer(
+                  flex: 1,
+                ),
+                for (int i = 0; i < 7; i++)
                   Expanded(
                     flex: 2,
-                    child:Padding(
+                    child: Padding(
                       padding: const EdgeInsets.fromLTRB(3.0, 5.0, 3.0, 5.0),
                       child: ConstrainedBox(
-                        constraints: const BoxConstraints.expand(height: 50.0),
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-                            backgroundColor: MaterialStateProperty.all<Color?>(
-                              _keyState[_keyPos[2][i]]! == 0 ? Colors.grey[400] :
-                              _keyState[_keyPos[2][i]]! == 1 ? Colors.green[600] :
-                              _keyState[_keyPos[2][i]]! == 2 ? Colors.yellow[800] :
-                              Colors.grey[700]
+                          constraints: const BoxConstraints.expand(height: 50.0),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
+                              backgroundColor: MaterialStateProperty.all<Color?>(_keyState[_keyPos[2][i]]! == 0
+                                  ? Colors.grey[400]
+                                  : _keyState[_keyPos[2][i]]! == 1
+                                      ? Colors.green[600]
+                                      : _keyState[_keyPos[2][i]]! == 2
+                                          ? Colors.yellow[800]
+                                          : Colors.grey[700]),
+                              padding: MaterialStateProperty.all<EdgeInsets?>(const EdgeInsets.all(0)),
                             ),
-                            padding: MaterialStateProperty.all<EdgeInsets?>(const EdgeInsets.all(0)),
-                          ),
-                          child: Center(
-                            child: Text(
-                              _keyPos[2][i],
-                              style: TextStyle (
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: _keyState[_keyPos[2][i]]! == 0 ? Colors.grey[850] : Colors.white,
+                            onPressed: "KANKER".contains(_keyPos[2][i])
+                                ? () {
+                                    InputNotification(type: InputType.singleCharacter, msg: _keyPos[2][i]).dispatch(context);
+                                  }
+                                : null,
+                            child: Center(
+                              child: Visibility(
+                                visible: "KANKER".contains(_keyPos[2][i]),
+                                child: Text(
+                                  _keyPos[2][i],
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: _keyState[_keyPos[2][i]]! == 0 ? Colors.grey[850] : Colors.white,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                          onPressed: () {
-                            InputNotification(type: InputType.singleCharacter, msg: _keyPos[2][i]).dispatch(context);
-                          },
-                        )
-                      ),
+                          )),
                     ),
                   ),
                 Expanded(
@@ -258,7 +279,9 @@ class _InputPannelWidgetState extends State<InputPannelWidget> {
                     ),
                   ),
                 ),
-                const Spacer(flex: 1,),
+                const Spacer(
+                  flex: 1,
+                ),
               ],
             ),
           ],

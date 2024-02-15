@@ -2,26 +2,26 @@
  * @Author       : Linloir
  * @Date         : 2022-03-05 20:56:05
  * @LastEditTime : 2022-03-11 14:54:04
- * @Description  : The display widget of the wordle game
+ * @Description  : The display widget of the Kankerdle game
  */
 
 import 'package:flutter/material.dart';
-import 'package:wordle/validation_provider.dart';
+import 'package:Kankerdle/validation_provider.dart';
 import './input_pannel.dart';
 import './event_bus.dart';
 import 'dart:math' as math;
 
-class WordleDisplayWidget extends StatefulWidget {
-  const WordleDisplayWidget({Key? key, required this.wordLen, required this.maxChances}) : super(key: key);
+class KankerdleDisplayWidget extends StatefulWidget {
+  const KankerdleDisplayWidget({super.key, required this.wordLen, required this.maxChances});
 
   final int wordLen;
   final int maxChances;
 
   @override
-  State<WordleDisplayWidget> createState() => _WordleDisplayWidgetState();
+  State<KankerdleDisplayWidget> createState() => _KankerdleDisplayWidgetState();
 }
 
-class _WordleDisplayWidgetState extends State<WordleDisplayWidget> with TickerProviderStateMixin{
+class _KankerdleDisplayWidgetState extends State<KankerdleDisplayWidget> with TickerProviderStateMixin {
   int r = 0;
   int c = 0;
   bool onAnimation = false;
@@ -31,23 +31,23 @@ class _WordleDisplayWidgetState extends State<WordleDisplayWidget> with TickerPr
   void _validationAnimation(List<int> validation) async {
     onAnimation = true;
     bool result = true;
-    for(int i = 0; i < widget.wordLen && onAnimation; i++) {
-      setState((){
+    for (int i = 0; i < widget.wordLen && onAnimation; i++) {
+      setState(() {
         inputs[r][i]["State"] = validation[i];
       });
-      if(validation[i] != 1) {
+      if (validation[i] != 1) {
         result = false;
       }
-      await Future.delayed(const Duration(milliseconds: 950));
+      await Future.delayed(const Duration(milliseconds: 300));
     }
-    if(!onAnimation) {
+    if (!onAnimation) {
       return;
     }
     mainBus.emit(event: "AnimationStops", args: []);
     onAnimation = false;
     r++;
     c = 0;
-    if(r == widget.maxChances || result == true) {
+    if (r == widget.maxChances || result == true) {
       mainBus.emit(event: "ValidationEnds", args: result);
       acceptInput = false;
     }
@@ -64,8 +64,8 @@ class _WordleDisplayWidgetState extends State<WordleDisplayWidget> with TickerPr
       c = 0;
       onAnimation = false;
       acceptInput = true;
-      for(int i = 0; i < widget.maxChances; i++) {
-        for(int j = 0; j < widget.wordLen; j++) {
+      for (int i = 0; i < widget.maxChances; i++) {
+        for (int j = 0; j < widget.wordLen; j++) {
           inputs[i][j]["Letter"] = "";
           inputs[i][j]["State"] = 0;
         }
@@ -77,21 +77,21 @@ class _WordleDisplayWidgetState extends State<WordleDisplayWidget> with TickerPr
   void initState() {
     super.initState();
     inputs = [
-      for(int i = 0; i < widget.maxChances; i++)
+      for (int i = 0; i < widget.maxChances; i++)
         [
-          for(int j = 0; j < widget.wordLen; j++)
+          for (int j = 0; j < widget.wordLen; j++)
             {
               "Letter": "",
               "State": 0,
-              "InputAnimationController": AnimationController(
-                duration: const Duration(milliseconds: 50), 
-                reverseDuration: const Duration(milliseconds: 100),
-                vsync: this
-              ),
+              "InputAnimationController":
+                  AnimationController(duration: const Duration(milliseconds: 50), reverseDuration: const Duration(milliseconds: 100), vsync: this),
             }
         ]
     ];
-    mainBus.onBus(event: "Attempt", onEvent: _onValidation,);
+    mainBus.onBus(
+      event: "Attempt",
+      onEvent: _onValidation,
+    );
     mainBus.onBus(event: "NewGame", onEvent: _onNewGame);
   }
 
@@ -118,7 +118,7 @@ class _WordleDisplayWidgetState extends State<WordleDisplayWidget> with TickerPr
                   child: Column(
                     //Column(
                     children: [
-                      for(int i = 0; i < widget.maxChances; i++)
+                      for (int i = 0; i < widget.maxChances; i++)
                         Expanded(
                           flex: 1,
                           child: Row(
@@ -146,13 +146,13 @@ class _WordleDisplayWidgetState extends State<WordleDisplayWidget> with TickerPr
                                                   animation: animation,
                                                   child: child,
                                                   builder: (context, child) {
-                                                    var _animation = Tween<double>( begin: math.pi / 2, end: 0).animate(animation);
+                                                    var tween = Tween<double>(begin: math.pi / 2, end: 0).animate(animation);
                                                     // return ConstrainedBox(
                                                     //   constraints: BoxConstraints.tightFor(height: constraints.maxHeight * _animation.value),
                                                     //   child: child,
                                                     // );
                                                     return Transform(
-                                                      transform: Matrix4.rotationX( _animation.value),
+                                                      transform: Matrix4.rotationX(tween.value),
                                                       alignment: Alignment.center,
                                                       child: child,
                                                     );
@@ -164,23 +164,40 @@ class _WordleDisplayWidgetState extends State<WordleDisplayWidget> with TickerPr
                                               child: DecoratedBox(
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
-                                                    color: inputs[i][j]["State"] == 1 ? Colors.green[600]! :
-                                                          inputs[i][j]["State"] == 2 ? Colors.yellow[800]! :
-                                                          inputs[i][j]["State"] == 3 ? Theme.of(context).brightness == Brightness.dark ? Colors.grey[400]! : Colors.grey[850]! :
-                                                          inputs[i][j]["State"] == -1 ? Colors.grey[700]! :
-                                                          Theme.of(context).brightness == Brightness.dark ? Colors.grey[700]! : Colors.grey[400]!,
+                                                    color: inputs[i][j]["State"] == 1
+                                                        ? Colors.green[600]!
+                                                        : inputs[i][j]["State"] == 2
+                                                            ? Colors.yellow[800]!
+                                                            : inputs[i][j]["State"] == 3
+                                                                ? Theme.of(context).brightness == Brightness.dark
+                                                                    ? Colors.grey[400]!
+                                                                    : Colors.grey[850]!
+                                                                : inputs[i][j]["State"] == -1
+                                                                    ? Colors.grey[700]!
+                                                                    : Theme.of(context).brightness == Brightness.dark
+                                                                        ? Colors.grey[700]!
+                                                                        : Colors.grey[400]!,
                                                     width: 2.0,
                                                   ),
-                                                  color: inputs[i][j]["State"] == 1 ? Colors.green[600]! :
-                                                        inputs[i][j]["State"] == 2 ? Colors.yellow[800]! :
-                                                        inputs[i][j]["State"] == -1 ? Colors.grey[700]! :
-                                                        Theme.of(context).brightness == Brightness.dark ? Colors.grey[850]! : Colors.white,
+                                                  color: inputs[i][j]["State"] == 1
+                                                      ? Colors.green[600]!
+                                                      : inputs[i][j]["State"] == 2
+                                                          ? Colors.yellow[800]!
+                                                          : inputs[i][j]["State"] == -1
+                                                              ? Colors.grey[700]!
+                                                              : Theme.of(context).brightness == Brightness.dark
+                                                                  ? Colors.grey[850]!
+                                                                  : Colors.white,
                                                 ),
                                                 child: Center(
                                                   child: Text(
                                                     inputs[i][j]["Letter"],
                                                     style: TextStyle(
-                                                      color: inputs[i][j]["State"] == 3 ? Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.grey[850]! :Colors.white,
+                                                      color: inputs[i][j]["State"] == 3
+                                                          ? Theme.of(context).brightness == Brightness.dark
+                                                              ? Colors.white
+                                                              : Colors.grey[850]!
+                                                          : Colors.white,
                                                       fontSize: 30,
                                                       fontWeight: FontWeight.bold,
                                                     ),
@@ -208,22 +225,20 @@ class _WordleDisplayWidgetState extends State<WordleDisplayWidget> with TickerPr
         ],
       ),
       onNotification: (noti) {
-        if(noti.type == InputType.singleCharacter) {
-          if(r < widget.maxChances && c < widget.wordLen && !onAnimation && acceptInput) {
-            setState((){
+        if (noti.type == InputType.singleCharacter) {
+          if (r < widget.maxChances && c < widget.wordLen && !onAnimation && acceptInput) {
+            setState(() {
               inputs[r][c]["Letter"] = noti.msg;
               inputs[r][c]["State"] = 3;
               var controller = inputs[r][c]["InputAnimationController"] as AnimationController;
               controller.forward().then((value) => controller.reverse());
               c++;
             });
-          }
-          else if(onAnimation){
+          } else if (onAnimation) {
             return true;
           }
-        }
-        else if(noti.type == InputType.backSpace) {
-          if(c > 0 && !onAnimation) {
+        } else if (noti.type == InputType.backSpace) {
+          if (c > 0 && !onAnimation) {
             setState(() {
               inputs[r][c - 1]["Letter"] = "";
               inputs[r][c - 1]["State"] = 0;

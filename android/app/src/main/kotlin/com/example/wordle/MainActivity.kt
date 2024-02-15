@@ -1,4 +1,4 @@
-package com.example.wordle
+package com.example.Kankerdle
 
 import io.flutter.embedding.android.FlutterActivity
 

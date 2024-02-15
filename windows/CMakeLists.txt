@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(wordle LANGUAGES CXX)
+project(Kankerdle LANGUAGES CXX)
 
-set(BINARY_NAME "wordle")
+set(BINARY_NAME "Kankerdle")
 
 cmake_policy(SET CMP0063 NEW)
 

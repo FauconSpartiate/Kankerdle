@@ -10,11 +10,11 @@ import './group_shared.dart';
 
 class SelectionGroupProvider extends StatefulWidget {
   const SelectionGroupProvider({
-    Key? key,
+    super.key,
     required this.selections,
     required this.onChanged,
     this.defaultSelection = 0,
-  }) : super(key: key);
+  });
 
   final Widget selections;
   final int defaultSelection;
@@ -36,6 +36,7 @@ class _SelectionGroupProviderState extends State<SelectionGroupProvider> {
   @override
   Widget build(BuildContext context) {
     return GroupSharedData(
+      selected: selected,
       child: NotificationListener<SelectNotification>(
         child: widget.selections,
         onNotification: (noti) {
@@ -46,7 +47,6 @@ class _SelectionGroupProviderState extends State<SelectionGroupProvider> {
           return true;
         },
       ),
-      selected: selected,
     );
   }
 }

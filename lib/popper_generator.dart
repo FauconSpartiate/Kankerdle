@@ -24,7 +24,7 @@ class FunctionCurve extends Curve {
 class PartyPopperGenerator extends StatefulWidget {
 
   const PartyPopperGenerator({
-    Key? key,
+    super.key,
     this.numbers = 100,
     required this.posX,
     required this.posY,
@@ -37,8 +37,7 @@ class PartyPopperGenerator extends StatefulWidget {
   }) : 
   assert(numbers > 0 && numbers < 500),
   assert(pieceWidth > 0),
-  assert(pieceHeight > 0),
-  super(key: key);
+  assert(pieceHeight > 0);
 
   //Controls the popping parameters
   final double posX;

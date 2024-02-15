@@ -14,7 +14,11 @@ class SelectNotification extends Notification {
 }
 
 class GroupSharedData extends InheritedWidget {
-  const GroupSharedData({Key? key, required child, required this.selected}) : super(key: key, child: child);
+  const GroupSharedData({
+    super.key,
+    required super.child,
+    required this.selected,
+  });
 
   final int selected;
 

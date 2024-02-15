@@ -1,6 +1,6 @@
-# Flutter-Wordle
+# Flutter-Kankerdle
 
-A wordle game written with flutter
+A Kankerdle game written with flutter
 
 ## How to play
 
@@ -8,7 +8,7 @@ Thanks to the feature of Flutter, the game is available on all platforms
 
 ### Play on Web
 
-Visit [Wordle on my server](http://wordle.linloir.cn) to play the online version
+Visit [Kankerdle on my server](http://Kankerdle.linloir.cn) to play the online version
 
 ### Play on Android
 
