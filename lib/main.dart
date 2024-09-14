@@ -6,13 +6,13 @@
  */
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:Kankerdle/event_bus.dart';
-import 'package:Kankerdle/loading_page.dart';
-import 'package:Kankerdle/single_selection.dart';
-import 'package:Kankerdle/selection_group.dart';
-import 'package:Kankerdle/scroll_behav.dart';
+import 'package:kankerdle/event_bus.dart';
+import 'package:kankerdle/loading_page.dart';
+import 'package:kankerdle/single_selection.dart';
+import 'package:kankerdle/selection_group.dart';
+import 'package:kankerdle/scroll_behav.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:Kankerdle/instruction_pannel.dart';
+import 'package:kankerdle/instruction_pannel.dart';
 import 'dart:io';
 import 'dart:math';
 

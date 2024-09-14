@@ -6,7 +6,7 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:Kankerdle/validation_provider.dart';
+import 'package:kankerdle/validation_provider.dart';
 import './input_pannel.dart';
 import './event_bus.dart';
 import 'dart:math' as math;

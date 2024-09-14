@@ -1,4 +1,4 @@
-name: Kankerdle
+name: kankerdle
 description: Wordle, but Kanker.
 
 # The following line prevents the package from being accidentally published to
@@ -45,13 +45,13 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
   icons_launcher: ^2.1.7
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+  # For information on the generic Dart part of this file, see the
+  # following page: https://dart.dev/tools/pub/pubspec
 
-# The following section is specific to Flutter.
+  # The following section is specific to Flutter.
 flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -64,13 +64,6 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - "assets/All.txt"
-    - "assets/CET4.txt"
-    - "assets/CET6.txt"
-    - "assets/CET4 + 6.txt"
-    - "assets/GRE Slim.txt"
-    - "assets/TOEFL Slim.txt"
-    - "assets/TOEFL.txt"
-    - "assets/HighSchool.txt"
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

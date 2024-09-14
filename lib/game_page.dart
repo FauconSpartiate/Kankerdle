@@ -8,11 +8,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:Kankerdle/event_bus.dart';
-import 'package:Kankerdle/validation_provider.dart';
-import 'package:Kankerdle/display_pannel.dart';
-import 'package:Kankerdle/instruction_pannel.dart';
-import 'package:Kankerdle/popper_generator.dart';
+import 'package:kankerdle/event_bus.dart';
+import 'package:kankerdle/validation_provider.dart';
+import 'package:kankerdle/display_pannel.dart';
+import 'package:kankerdle/instruction_pannel.dart';
+import 'package:kankerdle/popper_generator.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({super.key, required this.database, required this.wordLen, required this.maxChances, required this.gameMode});

@@ -6,7 +6,7 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:Kankerdle/validation_provider.dart';
+import 'package:kankerdle/validation_provider.dart';
 import './event_bus.dart';
 
 class InputPannelWidget extends StatefulWidget {
@@ -104,15 +104,15 @@ class _InputPannelWidgetState extends State<InputPannelWidget> {
                           constraints: const BoxConstraints.expand(height: 50.0),
                           child: ElevatedButton(
                             style: ButtonStyle(
-                              shape: MaterialStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-                              backgroundColor: MaterialStateProperty.all<Color?>(_keyState[_keyPos[0][i]]! == 0
+                              shape: WidgetStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
+                              backgroundColor: WidgetStateProperty.all<Color?>(_keyState[_keyPos[0][i]]! == 0
                                   ? Colors.grey[400]
                                   : _keyState[_keyPos[0][i]]! == 1
                                       ? Colors.green[600]
                                       : _keyState[_keyPos[0][i]]! == 2
                                           ? Colors.yellow[800]
                                           : Colors.grey[700]),
-                              padding: MaterialStateProperty.all<EdgeInsets?>(const EdgeInsets.all(0)),
+                              padding: WidgetStateProperty.all<EdgeInsets?>(const EdgeInsets.all(0)),
                             ),
                             onPressed: "KANKER".contains(_keyPos[0][i])
                                 ? () {
@@ -153,15 +153,15 @@ class _InputPannelWidgetState extends State<InputPannelWidget> {
                           constraints: const BoxConstraints.expand(height: 50.0),
                           child: ElevatedButton(
                             style: ButtonStyle(
-                              shape: MaterialStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-                              backgroundColor: MaterialStateProperty.all<Color?>(_keyState[_keyPos[1][i]]! == 0
+                              shape: WidgetStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
+                              backgroundColor: WidgetStateProperty.all<Color?>(_keyState[_keyPos[1][i]]! == 0
                                   ? Colors.grey[400]
                                   : _keyState[_keyPos[1][i]]! == 1
                                       ? Colors.green[600]
                                       : _keyState[_keyPos[1][i]]! == 2
                                           ? Colors.yellow[800]
                                           : Colors.grey[700]),
-                              padding: MaterialStateProperty.all<EdgeInsets?>(const EdgeInsets.all(0)),
+                              padding: WidgetStateProperty.all<EdgeInsets?>(const EdgeInsets.all(0)),
                             ),
                             onPressed: "KANKER".contains(_keyPos[1][i])
                                 ? () {
@@ -192,9 +192,9 @@ class _InputPannelWidgetState extends State<InputPannelWidget> {
                       constraints: const BoxConstraints.expand(height: 50.0),
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-                          backgroundColor: MaterialStateProperty.all<Color?>(Colors.grey[700]),
-                          padding: MaterialStateProperty.all<EdgeInsets?>(const EdgeInsets.all(0)),
+                          shape: WidgetStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
+                          backgroundColor: WidgetStateProperty.all<Color?>(Colors.grey[700]),
+                          padding: WidgetStateProperty.all<EdgeInsets?>(const EdgeInsets.all(0)),
                         ),
                         child: const Icon(
                           Icons.keyboard_backspace_rounded,
@@ -225,15 +225,15 @@ class _InputPannelWidgetState extends State<InputPannelWidget> {
                           constraints: const BoxConstraints.expand(height: 50.0),
                           child: ElevatedButton(
                             style: ButtonStyle(
-                              shape: MaterialStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-                              backgroundColor: MaterialStateProperty.all<Color?>(_keyState[_keyPos[2][i]]! == 0
+                              shape: WidgetStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
+                              backgroundColor: WidgetStateProperty.all<Color?>(_keyState[_keyPos[2][i]]! == 0
                                   ? Colors.grey[400]
                                   : _keyState[_keyPos[2][i]]! == 1
                                       ? Colors.green[600]
                                       : _keyState[_keyPos[2][i]]! == 2
                                           ? Colors.yellow[800]
                                           : Colors.grey[700]),
-                              padding: MaterialStateProperty.all<EdgeInsets?>(const EdgeInsets.all(0)),
+                              padding: WidgetStateProperty.all<EdgeInsets?>(const EdgeInsets.all(0)),
                             ),
                             onPressed: "KANKER".contains(_keyPos[2][i])
                                 ? () {
@@ -264,9 +264,9 @@ class _InputPannelWidgetState extends State<InputPannelWidget> {
                       constraints: const BoxConstraints.expand(height: 50.0),
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-                          backgroundColor: MaterialStateProperty.all<Color?>(Colors.green[600]),
-                          padding: MaterialStateProperty.all<EdgeInsets?>(const EdgeInsets.all(0)),
+                          shape: WidgetStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
+                          backgroundColor: WidgetStateProperty.all<Color?>(Colors.green[600]),
+                          padding: WidgetStateProperty.all<EdgeInsets?>(const EdgeInsets.all(0)),
                         ),
                         child: const Icon(
                           Icons.keyboard_return_rounded,

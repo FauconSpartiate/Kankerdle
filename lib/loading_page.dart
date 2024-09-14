@@ -6,9 +6,9 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:Kankerdle/game_page.dart';
-import 'package:Kankerdle/generator.dart';
-import 'package:Kankerdle/validation_provider.dart';
+import 'package:kankerdle/game_page.dart';
+import 'package:kankerdle/generator.dart';
+import 'package:kankerdle/validation_provider.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({super.key, required this.dicName, required this.wordLen, required this.maxChances, required this.gameMode});
